@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheria - AI-Powered Dream Weaver</title>
+    <!-- Google Fonts - Inter for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic CSS Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6a0572; /* Deep violet */
+            --secondary-color: #ab47bc; /* Lighter violet */
+            --accent-color: #e0b0ff; /* Light purple */
+            --text-color-light: #f0f0f0;
+            --text-color-dark: #333;
+            --background-gradient-start: #1a0033; /* Darker violet */
+            --background-gradient-end: #330066; /* Even darker violet */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrollbar from animation */
+        }
+
+        /* Main hero section styling */
+        .hero-section {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Ensure content is above background particles */
+        }
+
+        /* Hero headline animation */
+        .hero-headline {
+            font-size: clamp(2.5rem, 8vw, 5rem); /* Responsive font size */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color-light);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: dreamGlow 4s ease-in-out infinite alternate; /* The magic animation */
+            letter-spacing: -0.05em; /* Slightly tighter letter spacing */
+            line-height: 1.1;
+        }
+
+        @keyframes dreamGlow {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                text-shadow: 0 0 15px var(--accent-color);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(0) scale(1.01);
+                text-shadow: 0 0 25px var(--accent-color), 0 0 40px rgba(224, 176, 255, 0.5);
+            }
+            100% {
+                opacity: 0.9;
+                transform: translateY(-5px) scale(1);
+                text-shadow: 0 0 15px var(--accent-color);
+            }
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 2s ease-out 0.5s forwards; /* Fade in after headline */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color-light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+            opacity: 0; /* Initially hidden */
+            animation: fadeInScale 1.5s ease-out 1s forwards; /* Fade in and scale after tagline */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Background particle animation (for extra visual flair) */
+        .background-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatAndFade 15s infinite ease-in-out;
+        }
+
+        /* Create multiple particles with different delays and sizes */
+        .particle:nth-child(1) { width: 8px; height: 8px; top: 10%; left: 5%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 12px; height: 12px; top: 20%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 6px; height: 6px; top: 40%; left: 20%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 10px; height: 10px; top: 60%; left: 90%; animation-delay: 6s; }
+        .particle:nth-child(5) { width: 14px; height: 14px; top: 80%; left: 40%; animation-delay: 8s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; top: 30%; left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { width: 11px; height: 11px; top: 50%; left: 10%; animation-delay: 12s; }
+        .particle:nth-child(8) { width: 9px; height: 9px; top: 70%; left: 70%; animation-delay: 14s; }
+
+        @keyframes floatAndFade {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-50vh) translateX(20vw) scale(1);
+                opacity: 0.6;
+            }
+            75% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(40vw) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <main class="hero-section">
+        <h1 class="hero-headline">Aetheria</h1>
+        <p class="hero-tagline">Unleash the Power of Your Dreams with AI Visualization.</p>
+        <a href="#learn-more" class="cta-button">Explore Your Dreamscape</a>
+    </main>
+</body>
+</html>
